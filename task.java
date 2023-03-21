@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Есть тест. Нужно извлечь из него все слова и отсортировать по длине.
  * Мороз и солнце день чудесный Еще ты дремлешь друг прелестный Пора красавица проснись
@@ -12,11 +15,11 @@
 public class task {
 
     public static void main(String[] args) {
-
     collectStats("Мороз и солнце день чудесный Еще ты дремлешь друг прелестный Пора красавица проснись");
     }
     
     private static void collectStats(String text) {
+        Map<Integer, String> stats = new HashMap<>();
         String[] split = text.split(" ");
         int maxLength = split[0].length();
         for (int i = 0; i < split.length; i++){
@@ -24,16 +27,21 @@ public class task {
                 maxLength = split[i].length();
             }
         }
-        //Map<Integer, List<String>> stats = new HashMap<>();
-        String str = "";
         for (int i = 1; i <= maxLength; i++){
+            String str = "";
             for (int j = 0; j < split.length; j++){
                 if (split[j].length() == i){
-                    //System.out.println(split[i].length() + " " + j);
-                    str = str + " " + split[j];
+                    str = str + split[j]+" ";
                 }
             }
-            System.out.println(str);
+            if (str.equals("") == false){
+                stats.put(i,str);
+            }
+        }
+        for (int i = 1; i <= maxLength; i++){
+            if (stats.get(i) != null){
+                System.out.println(stats.get(i));
+            }
         }
     }
 }
